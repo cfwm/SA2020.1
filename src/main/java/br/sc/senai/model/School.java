@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "categorias")
-public class Categoria extends DateAudit {
+@Table(name = "escolas")
+public class School extends DateAudit {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -16,7 +16,23 @@ public class Categoria extends DateAudit {
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
+    private String name;
+
+    @NotBlank
+    @Size(max = 50)
+    private String email;
+
+    @NotBlank
+    @Size(max = 100)
+    private String responsible_name;
+
+    @NotBlank
+    @Size(max = 15)
+    private String responsible_cellPhone;
+
+    @NotBlank
+    @Size(max = 15)
+    private String school_phone;
 
     public Integer getId() {
         return id;
@@ -26,12 +42,44 @@ public class Categoria extends DateAudit {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getResponsible_name() {
+        return responsible_name;
+    }
+
+    public void setResponsible_name(String responsible_name) {
+        this.responsible_name = responsible_name;
+    }
+
+    public String getResponsible_cellPhone() {
+        return responsible_cellPhone;
+    }
+
+    public void setResponsible_cellPhone(String responsible_cellPhone) {
+        this.responsible_cellPhone = responsible_cellPhone;
+    }
+
+    public String getSchool_phone() {
+        return school_phone;
+    }
+
+    public void setSchool_phone(String school_phone) {
+        this.school_phone = school_phone;
     }
 
     @Override

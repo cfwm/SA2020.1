@@ -72,11 +72,16 @@ public class UserController {
         }
     }
 
-    // TODO atualizar
-    @PostMapping(path = "/allbyname") // Endpoint que recebe apenas requisições POST para inclusão de usuários
-    public @ResponseBody Iterable<User> findByName(@RequestParam String nome) {
-        // @ResponseBody significa que a String retornada é a resposta
-        // @RequestParam significa que é um parâmetro da solicitação GET ou POST
-        return userRepository.findAllByName(nome);
+    @GetMapping(path = "/users/{name}")
+    public @ResponseBody ResponseEntity<User> allByName(@PathVariable String name, @RequestBody User user){
+
+        try{
+            if (((Collection<?>) user).size() == 0){
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "escolas")
-public class Escola extends DateAudit {
+@Table(name = "produtos")
+public class Product extends DateAudit {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -16,23 +16,19 @@ public class Escola extends DateAudit {
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
-
-    @NotBlank
-    @Size(max = 50)
-    private String email;
+    private String name;
 
     @NotBlank
     @Size(max = 100)
-    private String nome_responsavel;
+    private String description;
 
     @NotBlank
-    @Size(max = 15)
-    private String celular_responsavel;
+    @Size(max = 10)
+    private Float price;
 
-    @NotBlank
-    @Size(max = 15)
-    private String telefone_escola;
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable=false)
+    private Category category;
 
     public Integer getId() {
         return id;
@@ -42,44 +38,36 @@ public class Escola extends DateAudit {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getNome_responsavel() {
-        return nome_responsavel;
+    public Float getPrice() {
+        return price;
     }
 
-    public void setNome_responsavel(String nome_responsavel) {
-        this.nome_responsavel = nome_responsavel;
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
-    public String getCelular_responsavel() {
-        return celular_responsavel;
+    public Category getCategoria() {
+        return category;
     }
 
-    public void setCelular_responsavel(String celular_responsavel) {
-        this.celular_responsavel = celular_responsavel;
-    }
-
-    public String getTelefone_escola() {
-        return telefone_escola;
-    }
-
-    public void setTelefone_escola(String telefone_escola) {
-        this.telefone_escola = telefone_escola;
+    public void setCategoria(Category category) {
+        this.category = category;
     }
 
     @Override

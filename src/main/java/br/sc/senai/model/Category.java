@@ -5,12 +5,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "listas")
-public class Lista extends DateAudit {
+@Table(name = "category")
+public class Category extends DateAudit {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -18,17 +16,7 @@ public class Lista extends DateAudit {
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
-
-    @OneToOne
-    @JoinColumn(name="turma_id")
-    private Turma turma;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "lista_produto",
-            joinColumns = @JoinColumn(name = "lista_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id"))
-    private Set<Produto> produto = new HashSet();
+    private String name;
 
     public Integer getId() {
         return id;
@@ -38,20 +26,12 @@ public class Lista extends DateAudit {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Set<Produto> getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Set<Produto> produto) {
-        this.produto = produto;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

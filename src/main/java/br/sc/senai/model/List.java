@@ -5,10 +5,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "turmas")
-public class Turma extends DateAudit {
+@Table(name = "lists")
+public class List extends DateAudit {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -16,15 +18,17 @@ public class Turma extends DateAudit {
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
-
-    @ManyToOne
-    @JoinColumn(name="escola_id", nullable=false)
-    private Escola escola;
+    private String name;
 
     @OneToOne
-    @JoinColumn(name="lista_id", nullable=false)
-    private Lista lista;
+    @JoinColumn(name="group_id")
+    private Group group;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "list_product",
+            joinColumns = @JoinColumn(name = "list_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> product = new HashSet();
 
     public Integer getId() {
         return id;
@@ -34,34 +38,28 @@ public class Turma extends DateAudit {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Escola getEscola() {
-        return escola;
+    public Group getGroup() { return group; }
+
+    public void setGroup(Group group) { this.group = group; }
+
+    public Set<Product> getProduct() {
+        return product;
     }
 
-    public void setEscola(Escola escola) {
-        this.escola = escola;
-    }
-
-    public Lista getLista() {
-        return lista;
-    }
-
-    public void setLista(Lista lista) {
-        this.lista = lista;
+    public void setProduct(Set<Product> product) {
+        this.product = product;
     }
 
     @Override
-    public Boolean getStatus() {
-        return super.getStatus();
-    }
+    public Boolean getStatus() { return super.getStatus(); }
 
     @Override
     public void setStatus(Boolean status) {

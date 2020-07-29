@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "produtos")
-public class Produto extends DateAudit {
+@Table(name = "group")
+public class Group extends DateAudit {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -16,19 +16,15 @@ public class Produto extends DateAudit {
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
-
-    @NotBlank
-    @Size(max = 100)
-    private String descricao;
-
-    @NotBlank
-    @Size(max = 10)
-    private Float valor;
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name="categoria_id", nullable=false)
-    private Categoria categoria;
+    @JoinColumn(name="school_id", nullable=false)
+    private School school;
+
+    @OneToOne
+    @JoinColumn(name="list_id", nullable=false)
+    private List list;
 
     public Integer getId() {
         return id;
@@ -38,36 +34,28 @@ public class Produto extends DateAudit {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public School getSchool() {
+        return school;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setSchool(School school) {
+        this.school = school;
     }
 
-    public Float getValor() {
-        return valor;
+    public List getList() {
+        return list;
     }
 
-    public void setValor(Float valor) {
-        this.valor = valor;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setList(List list) {
+        this.list = list;
     }
 
     @Override
